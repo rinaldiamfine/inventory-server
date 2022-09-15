@@ -1,0 +1,6 @@
+.is-popup  {
+    position: fixed;
+    width: 100%;
+    top: 30px;
+    display: none !important;
+}

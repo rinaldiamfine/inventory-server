@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Dashboard</title>
+        <link href="{{ url_for('packages', path='/asset/fontawesome/css/all.css') }}" rel="stylesheet"/>
+        <link href="{{ url_for('packages', path='/bulma/css/bulma.css') }}" rel="stylesheet"/>
+
+        <link href="{{ url_for('packages', path='/asset/css/dashboard.css') }}" rel="stylesheet"/>
+    </head>
+    <body>
+        <div class="columns is-12 is-popup">
+            <article class="message is-warning column is-4 is-offset-8 p-0 box">
+                <!-- <div class="message-header">
+                    <p>Message</p>
+                    <button class="delete" aria-label="delete"></button>
+                </div> -->
+                <div class="message-body">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. <strong>Pellentesque risus mi</strong>, tempus quis placerat ut, porta nec nulla.
+                </div>
+            </article>
+        </div>
+
+        <section class="hero is-light is-fullheight">
+            <div class="hero-body">
+              <div class="column is-12">
+                <div class="tile is-ancestor">
+                    <div class="tile is-vertical is-8">
+                      <div class="tile">
+
+                        <div class="tile is-parent">
+                          <div class="tile box">
+                            <!-- <div class="chart-container" style="position: relative; height:100px;">
+                              <canvas id="pieChart" style="position: relative; height:100px;"></canvas>
+                            </div> -->
+                          </div>
+                        </div>
+                        <div class="tile is-parent">
+                          <div class="tile box">
+                            <canvas id="lineChart"></canvas>
+                          </div>
+                        </div>
+
+                      </div>
+
+                      <div class="tile is-parent">
+                        <div class="tile is-child box">
+                          <canvas id="barChart"></canvas>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="tile is-parent">
+                      <div class="tile is-vertical box">
+                        <p class="is-title">Overview By Category</p>
+
+                        <canvas id="pieChart" style="position: relative;"></canvas>
+
+                        <table class="table is-fullwidth is-small is-hoverable is-striped">
+                            <thead>
+                                <tr>
+                                    <th class="is-size-7">No.</th>
+                                    <th class="is-size-7">Name</th>
+                                    <th class="is-size-7">Part No.</th>
+                                    <th class="is-size-7">Date</th>
+                                    <th class="is-size-7">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th class="is-size-7">1</th>
+                                    <td class="is-size-7">
+                                      <a href="#" title="Title">ABC</a>
+                                    </td>
+                                    <td class="is-size-7">23</td>
+                                    <td class="is-size-7">12</td>
+                                    <td class="is-size-7">3</td>
+                                </tr>
+                                <tr>
+                                    <th class="is-size-7">2</th>
+                                    <td class="is-size-7">
+                                      <a href="#" title="Title">DEF</a>
+                                    </td>
+                                    <td class="is-size-7">23</td>
+                                    <td class="is-size-7">12</td>
+                                    <td class="is-size-7">3</td>
+                                </tr>
+                                <tr>
+                                  <th class="is-size-7">3</th>
+                                  <td class="is-size-7">
+                                    <a href="#" title="Title">GHI</a>
+                                  </td>
+                                  <td class="is-size-7">23</td>
+                                  <td class="is-size-7">12</td>
+                                  <td class="is-size-7">3</td>
+                              </tr>
+                            </tbody>
+                        </table>
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+
+        </section>
+        
+        <script src="{{ url_for('packages', path='/graph/dist/chart.js') }}"></script>
+        <script src="{{ url_for('packages', path='/asset/js/dashboard.js') }}"></script>
+        <script src="{{ url_for('packages', path='/asset/js/socket.js') }}"></script>
+    </body>
+</html>
