@@ -14,10 +14,18 @@ class DatabaseManager:
         )
 
     
-    def  get_list_employee(self):
+    def get_list_employee(self):
         cursor = self.connection.cursor()
+        print(cursor, "CURSOR")
         cursor.execute("SELECT * FROM employees")
         result = cursor.fetchall()
+        print(result, "RESULT")
+        return result
+
+    def get_employee(self, id):
+        cursor = self.connection.cursor()
+        cursor.execute("SELECT * FROM employees WHERE id = %s", (id,))
+        result = cursor.fetchone()
         return result
 
         # # self.cursor = self.db.cursor()

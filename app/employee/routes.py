@@ -8,12 +8,13 @@ from fastapi import Response
 from app.tools.background import app_background
 
 EmployeeRoute = APIRouter()
-from app import database
+from app.tools.database import DatabaseManager
 
 @EmployeeRoute.get("/employee", tags=['Employees'])
 def employee_list(request: Request):
     '''Employee List'''
-    employees = database.get_list_employee()
+    db = DatabaseManager()
+    employees = db.get_list_employee()
     print("Employees: ", employees)
     return Response(
         content=json.dumps(str(employees)),
