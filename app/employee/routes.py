@@ -1,3 +1,4 @@
+import imp
 from fastapi import APIRouter, Request, WebSocket, WebSocketDisconnect
 from fastapi.responses import HTMLResponse
 from fastapi import Response
@@ -7,6 +8,7 @@ from fastapi import Response
 from app.tools.background import app_background
 
 EmployeeRoute = APIRouter()
+from app import database
 
 @EmployeeRoute.get("/employee", tags=['Employees'])
 def employee_list(request: Request):
@@ -17,8 +19,9 @@ def employee_list(request: Request):
             {"id": 2, "name": "Jane Doe", "age": 36}
         ]
     }
+    employees = database.get_list_employee()
     return Response(
-        content=json.dumps(str(res)),
+        content=json.dumps(str(employees)),
         status_code=http.client.OK,
         media_type='application/json'
     )

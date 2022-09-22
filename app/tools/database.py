@@ -12,6 +12,14 @@ class DatabaseManager:
             password=config.DB_PASSWORD,
             database=config.DB_NAME
         )
+
+    
+    def  get_list_employee(self):
+        cursor = self.connection.cursor()
+        cursor.execute("SELECT * FROM employees")
+        result = cursor.fetchall()
+        return result
+
         # # self.cursor = self.db.cursor()
         # # self.engine = create_engine(config.DB_URI)
 
