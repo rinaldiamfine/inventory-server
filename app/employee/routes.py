@@ -6,37 +6,54 @@ import json
 import http.client
 from fastapi import Response
 from app.tools.background import app_background
+from app.employee.models import EmployeeModel
 
 EmployeeRoute = APIRouter()
-from app.tools.database import DatabaseManager
 
 @EmployeeRoute.get("/employee", tags=['Employees'])
 def employee_list(request: Request):
     '''Employee List'''
-    db = DatabaseManager()
-    employees = db.get_list_employee()
-    print("Employees: ", employees)
-    return Response(
-        content=json.dumps(str(employees)),
-        status_code=http.client.OK,
-        media_type='application/json'
-    )
+    try:
+        employee = EmployeeModel()
+        status, res = employee.get_employee()
+        if not status:
+            return Response(content=res, status_code=400)
+
+        print("Employees: ", res)
+        return Response(
+            content=json.dumps(res),
+            status_code=http.client.OK,
+            media_type='application/json'
+        )
+    except Exception as e:
+        print(e)
+        return Response(
+            content=json.dumps({'message': 'Error'}),
+            status_code=http.client.INTERNAL_SERVER_ERROR,
+            media_type='application/json'
+        )
     
 @EmployeeRoute.get("/employee/{id}", tags=['Employees'])
 def employee_detail(request: Request, id: int):
     '''Employee Detail'''
-    res = {
-        "data": {
-            "id": id,
-            "name": "John Doe",
-            "age": 42
-        }
-    }
-    return Response(
-        content=json.dumps(str(res)),
-        status_code=http.client.OK,
-        media_type='application/json'
-    )
+    try:
+        employee = EmployeeModel()
+        status, res = employee.get_employee_by_id(id)
+        if not status:
+            return Response(content=res, status_code=400)
+            
+        return Response(
+            content=json.dumps(res),
+            status_code=http.client.OK,
+            media_type='application/json'
+        )
+    except Exception as e:
+        print(e)
+        return Response(
+            content=json.dumps({'message': 'Error'}),
+            status_code=http.client.INTERNAL_SERVER_ERROR,
+            media_type='application/json'
+        )
     
 @EmployeeRoute.post("/employee", tags=['Employees'])
 def employee_create(request: Request):
