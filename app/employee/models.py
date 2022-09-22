@@ -4,10 +4,9 @@ class EmployeeModel:
     def __init__(self) -> None:
         self.db  = DatabaseManager()
 
-
     def get_employee(self):
         try:
-            cursor = self.db.cursor()
+            cursor = self.db.connection.cursor()
             cursor.execute("SELECT * FROM employees")
             columns = [column[0] for column in cursor.description]
             result = [
@@ -20,7 +19,7 @@ class EmployeeModel:
 
     def get_employee_by_id(self, id):
         try:
-            cursor = self.db.cursor()
+            cursor = self.db.connection.cursor()
             cursor.execute("SELECT * FROM employees WHERE id = %s", (id,))
             columns = [column[0] for column in cursor.description]
             result = [
