@@ -7,18 +7,13 @@ import http.client
 from fastapi import Response
 from app.tools.background import app_background
 
-InventoryRoute = APIRouter()
+OrderRoute = APIRouter()
 
 websites = Jinja2Templates(directory="app/templates")
 
-@InventoryRoute.get("/dashboard", response_class=HTMLResponse, tags=['Dashboards'])
-async def website_dashboard(request: Request):
-    '''Dashboard View'''
-    return websites.TemplateResponse("dashboard.html", {"request": request})
-
-@InventoryRoute.get("/inventory", tags=['Inventories'])
-def inventory_list(request: Request):
-    '''Inventory List'''
+@OrderRoute.get("/order", tags=['Inventories'])
+def order_list(request: Request):
+    '''Order List'''
     res = {
         "data": [
             {"id": 1, "name": "John Doe", "age": 42},
@@ -31,19 +26,19 @@ def inventory_list(request: Request):
         media_type='application/json'
     )
     
-@InventoryRoute.post("/inventory", tags=['Inventories'])
-def inventory_create(request: Request):
-    '''Create Inventory'''
-    res = "Inventory Created"
+@OrderRoute.post("/order", tags=['Inventories'])
+def order_create(request: Request):
+    '''Create Order'''
+    res = "Order Created"
     return Response(
         content=json.dumps(str(res)),
         status_code=http.client.OK,
         media_type='application/json'
     )
     
-@InventoryRoute.get("/inventory/{id}", tags=['Inventories'])
-def inventory_detail(request: Request, id: int):
-    '''Inventory Detail'''
+@OrderRoute.get("/order/{id}", tags=['Inventories'])
+def order_detail(request: Request, id: int):
+    '''Order Detail'''
     res = {
         "data": [
             {"id": id, "name": "John Doe", "age": 42},
@@ -55,20 +50,20 @@ def inventory_detail(request: Request, id: int):
         media_type='application/json'
     )
     
-@InventoryRoute.put("/inventory/{id}", tags=['Inventories'])
-def inventory_update(request: Request, id: int):
-    '''Update Inventory'''
-    res = "Inventory Updated"
+@OrderRoute.put("/order/{id}", tags=['Inventories'])
+def order_update(request: Request, id: int):
+    '''Update Order'''
+    res = "Order Updated"
     return Response(
         content=json.dumps(str(res)),
         status_code=http.client.OK,
         media_type='application/json'
     )
     
-@InventoryRoute.delete("/inventory/{id}", tags=['Inventories'])
-def inventory_delete(request: Request, id: int):
-    '''Delete Inventory'''
-    res = "Inventory Deleted"
+@OrderRoute.delete("/order/{id}", tags=['Inventories'])
+def order_delete(request: Request, id: int):
+    '''Delete Order'''
+    res = "Order Deleted"
     return Response(
         content=json.dumps(str(res)),
         status_code=http.client.OK,

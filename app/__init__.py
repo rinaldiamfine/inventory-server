@@ -15,7 +15,7 @@ database = DatabaseManager()
 
 app.mount("/packages", StaticFiles(directory="app/packages"), name="packages")
 
-from app.inventory.routes import InventoryRoute
+from app.order.routes import OrderRoute
 from app.employee.routes import EmployeeRoute
 from app.department.routes import DepartmentRoute
 from app.product.routes import ProductRoute
@@ -44,7 +44,7 @@ from app.product.routes import ProductRoute
 #     except WebSocketDisconnect:
 #         app_socket.disconnect(websocket, index_id)
 
-app.include_router(InventoryRoute)
+app.include_router(OrderRoute)
 app.include_router(EmployeeRoute)
 app.include_router(DepartmentRoute)
 app.include_router(ProductRoute)

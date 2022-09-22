@@ -13,13 +13,8 @@ from app import database
 @EmployeeRoute.get("/employee", tags=['Employees'])
 def employee_list(request: Request):
     '''Employee List'''
-    res = {
-        "data": [
-            {"id": 1, "name": "John Doe", "age": 42},
-            {"id": 2, "name": "Jane Doe", "age": 36}
-        ]
-    }
     employees = database.get_list_employee()
+    print("Employees: ", employees)
     return Response(
         content=json.dumps(str(employees)),
         status_code=http.client.OK,
