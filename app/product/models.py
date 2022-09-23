@@ -2,7 +2,7 @@ from app.tools.database import DatabaseManager
 
 class ProductModel:
     def __init__(self):
-        pass
+        self.db = DatabaseManager()
 
     def get_product(self):
         try:
