@@ -51,7 +51,7 @@ class EmployeeModel:
     def delete_employee(self, id):
         try:
             cursor = self.db.connection.cursor()
-            cursor.execute("UPDATE employees SET is_active=0 WHERE id = %s", (id))
+            cursor.execute("UPDATE employees SET is_active=0 WHERE id = %s", (id,))
             self.db.connection.commit()
             return True, "Employee deleted successfully"
         except Exception as e:

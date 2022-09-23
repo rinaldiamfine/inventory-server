@@ -111,7 +111,9 @@ def employee_delete(request: Request, id: int):
     '''Employee Delete'''
     try:
         employee = EmployeeModel()
-        status, res = employee.delete_employee(id)
+        status, res = employee.delete_employee(
+            id=id
+        )
         if not status:
             return Response(content=res, status_code=400)
 
