@@ -11,7 +11,7 @@ OrderRoute = APIRouter()
 
 websites = Jinja2Templates(directory="app/templates")
 
-@OrderRoute.get("/order", tags=['Inventories'])
+@OrderRoute.get("/order", tags=['Orders'])
 def order_list(request: Request):
     '''Order List'''
     res = {

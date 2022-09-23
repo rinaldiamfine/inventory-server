@@ -1,3 +1,3 @@
 tags_metadata = [
-    {"name": "Dashboards", "description": ""},
+    # {"name": "Dashboards", "description": ""},
 ]

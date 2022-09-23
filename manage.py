@@ -9,7 +9,6 @@ import sys
 def script_manager(args=[]):
     code = args[1]
     if code == "run":
-        print("RUN SERVER")
         if configuration.DEBUG == True:
             # For local
             uvicorn.run("app:app", host='0.0.0.0', port=8000, reload=True, debug=True)
@@ -18,6 +17,7 @@ def script_manager(args=[]):
             uvicorn.run(app, host='0.0.0.0', port=8000, debug=False)
     if code == "mail":
         print("MAIL SCHEDULE")
+        
         
     if code == "authenticate":
         print("RESET AUTHENTICATE")
