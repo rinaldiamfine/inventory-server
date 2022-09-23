@@ -56,12 +56,13 @@ def employee_detail(request: Request, id: int):
         )
     
 @EmployeeRoute.post("/employee", tags=['Employees'])
-def employee_create(request: Request):
+async def employee_create(request: Request):
     '''Employee Create'''
     try:
         employee = EmployeeModel()
+        datas = await request.json()
         status, res = employee.create_employee(
-            data=request.json()
+            data=datas
         )
         if not status:
             return Response(content=res, status_code=400)
@@ -80,13 +81,14 @@ def employee_create(request: Request):
         )
     
 @EmployeeRoute.put("/employee/{id}", tags=['Employees'])
-def employee_update(request: Request, id: int):
+async  def employee_update(request: Request, id: int):
     '''Employee Update'''
     try:
         employee = EmployeeModel()
+        datas = await request.json()
         status, res = employee.update_employee(
             id=id,
-            data=request.json()
+            data=datas
         )
         if not status:
             return Response(content=res, status_code=400)
