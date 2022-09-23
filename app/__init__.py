@@ -12,6 +12,7 @@ app = FastAPI()
 app_socket = socket
 configuration = config
 mail = MailManager()
+# database = None
 database = DatabaseManager()
 
 app.mount("/packages", StaticFiles(directory="app/packages"), name="packages")
