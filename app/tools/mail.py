@@ -58,6 +58,7 @@ class MailManager:
         if not order_status:
             return "Failed to get the order datas"
         
+        print(order_ids, "ORDERDS")
         for order_id in order_ids:
             employee_status, employee_ids = EmployeeModel().get_employee_by_id(
                 id=order_id.get("employee_id")
@@ -66,7 +67,7 @@ class MailManager:
                 employee_id = employee_ids[0]
                 emp_id = employee_id.get("id")
                 print(f'Send the notification to employee = {emp_id}')
-                message = self.msg
+                message = EmailMessage()
                 message['To'] = employee_id.get("email")
                 self.server.send_message(message)
             
