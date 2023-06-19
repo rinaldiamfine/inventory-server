@@ -17,13 +17,6 @@ async def user_authentication(request: Request):
         user = UserModel()
         datas = await request.json()
         
-        headers = request.headers
-        status_decode_uid, decode_uid = validate_token(
-            headers=headers
-        )
-        if not status_decode_uid:
-            return Response(content=decode_uid, status_code=http.client.UNAUTHORIZED)
-        
         status, res = user.auth_users(
             username=datas.get("username"),
             password=datas.get("password")
