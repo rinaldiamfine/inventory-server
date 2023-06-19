@@ -15,7 +15,7 @@ mail = MailManager()
 # database = None
 database = DatabaseManager()
 
-app.mount("/packages", StaticFiles(directory="app/packages"), name="packages")
+# app.mount("/packages", StaticFiles(directory="app/packages"), name="packages")
 
 from app.order.routes import OrderRoute
 from app.employee.routes import EmployeeRoute
