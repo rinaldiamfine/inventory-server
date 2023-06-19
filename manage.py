@@ -16,12 +16,10 @@ def script_manager(args=[]):
             # For production
             uvicorn.run(app, host='0.0.0.0', port=8000, debug=False)
 
-    if code == "mail":
+    if code == "order_notification_scheduler":
         from app import mail
-        mail.send_email()
-        
-    if code == "authenticate":
-        print("RESET AUTHENTICATE")
+        status = mail.order_notification_scheduler()
+        print(status)
 
 if __name__ == '__main__':
     script_manager(sys.argv)

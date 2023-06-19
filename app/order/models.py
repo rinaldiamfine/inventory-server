@@ -29,6 +29,19 @@ class OrderModel:
             return True, result
         except Exception as e:
             return False, str(e)
+        
+    def get_order_expired(self, date, status):
+        try:
+            cursor = self.db.connection.cursor()
+            cursor.execute("SELECT * FROM orders WHERE `end_date` < %s AND `status` = %s", (date, status, ))
+            columns = [column[0] for column in cursor.description]
+            result = [
+                dict(zip(columns, row))
+                for row in cursor.fetchall()
+            ]
+            return True, result
+        except Exception as e:
+            return False, str(e)
 
     def create_order(self, data):
         try:

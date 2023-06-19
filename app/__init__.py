@@ -21,8 +21,10 @@ from app.order.routes import OrderRoute
 from app.employee.routes import EmployeeRoute
 from app.department.routes import DepartmentRoute
 from app.product.routes import ProductRoute
+from app.user.routes import UserRoute
 
 app.include_router(OrderRoute)
 app.include_router(EmployeeRoute)
 app.include_router(DepartmentRoute)
 app.include_router(ProductRoute)
+app.include_router(UserRoute)
