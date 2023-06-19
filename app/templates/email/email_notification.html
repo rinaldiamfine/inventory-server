@@ -46,20 +46,22 @@
                                                     </p>
                                                     <hr style="margin-top:24px;border:0;border-bottom:1px solid #c1c7d0">
                                                     <p>
-                                                        <table align="left" width="100%" style="padding: 0 50px;">
-                                                            <tr>
-                                                                <td align="center">Product Name</td>
-                                                                <td align="center">Qty</td>
-                                                                <td align="center">Loan Date</td>
-                                                                <td align="center">Due Date</td>
-                                                            </tr>
+                                                        <table align="left" width="100%" style="padding: 0 20px;">
+                                                            <thead>
+                                                                <tr>
+                                                                    <td style="padding: 5px;"><b>Product Name</b></td>
+                                                                    <td style="padding: 5px;"><b>Qty</b></td>
+                                                                    <td style="padding: 5px;"><b>Loan Date</b></td>
+                                                                    <td style="padding: 5px;"><b>Due Date</b></td>
+                                                                </tr>
+                                                            </thead>
                                                             <tbody>
                                                                 {% for order in order_ids %}
                                                                     <tr>
-                                                                        <td>{{ order['product_name']}}</td>
-                                                                        <td>{{ order['qty']}}</td>
-                                                                        <td>{{ order['loan_date']}}</td>
-                                                                        <td>{{ order['due_date']}}</td>
+                                                                        <td style="padding: 5px;">{{ order['product_name']}}</td>
+                                                                        <td style="padding: 5px;">{{ order['qty']}}</td>
+                                                                        <td style="padding: 5px;">{{ order['loan_date']}}</td>
+                                                                        <td style="padding: 5px;">{{ order['due_date']}}</td>
                                                                     </tr>
                                                                 {% endfor %}
                                                             </tbody>
