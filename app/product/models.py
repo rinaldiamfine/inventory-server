@@ -53,6 +53,8 @@ class ProductModel:
             cursor = self.db.connection.cursor()
             cursor.execute("UPDATE products SET is_active=0 WHERE id = %s", (id,))
             self.db.connection.commit()
+            cursor.close()
+            self.db.connection.close()
             return True, "Product deleted successfully"
         except Exception as e:
             return False, str(e)
