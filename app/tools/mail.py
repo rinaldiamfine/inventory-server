@@ -3,6 +3,7 @@ from email.message import EmailMessage
 import smtplib, ssl
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from email.utils import formataddr
 import config
 from app.order.models import OrderModel
 from app.employee.models import EmployeeModel
@@ -105,7 +106,7 @@ class MailManager:
                 message = MIMEMultipart()
                 message['To'] = email
                 message['Subject'] = "Infineon - Expired Loan Notification"
-                message['From'] = self.user
+                message['From'] = formataddr(("Inventory Loan", self.user))
                 message.attach(MIMEText(template_render, "html"))
                 self.server.send_message(message)
         

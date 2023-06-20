@@ -13,6 +13,8 @@ class EmployeeModel:
                 dict(zip(columns, row))
                 for row in cursor.fetchall()
             ]
+            cursor.close()
+            self.db.connection.close()
             return True, result
         except Exception as e:
             return False, str(e)
@@ -26,6 +28,8 @@ class EmployeeModel:
                 dict(zip(columns, row))
                 for row in cursor.fetchall()
             ]
+            cursor.close()
+            self.db.connection.close()
             return True, result
         except Exception as e:
             return False, str(e)
@@ -35,6 +39,8 @@ class EmployeeModel:
             cursor = self.db.connection.cursor()
             cursor.execute("INSERT INTO employees (name, email, department_id, badge_id) VALUES (%s, %s, %s, %s)", (data['name'], data['email'], data['department_id'], data['badge_id']))
             self.db.connection.commit()
+            cursor.close()
+            self.db.connection.close()
             return True, "Employee created successfully"
         except Exception as e:
             return False, str(e)
@@ -44,6 +50,8 @@ class EmployeeModel:
             cursor = self.db.connection.cursor()
             cursor.execute("UPDATE employees SET name = %s, email = %s, department_id = %s, badge_id = %s WHERE id = %s", (data['name'], data['email'], data['department_id'], data['badge_id'], id))
             self.db.connection.commit()
+            cursor.close()
+            self.db.connection.close()
             return True, "Employee updated successfully"
         except Exception as e:
             return False, str(e)
@@ -53,6 +61,8 @@ class EmployeeModel:
             cursor = self.db.connection.cursor()
             cursor.execute("UPDATE employees SET is_active=0 WHERE id = %s", (id,))
             self.db.connection.commit()
+            cursor.close()
+            self.db.connection.close()
             return True, "Employee deleted successfully"
         except Exception as e:
             return False, str(e)

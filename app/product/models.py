@@ -13,6 +13,8 @@ class ProductModel:
                 dict(zip(columns, row))
                 for row in cursor.fetchall()
             ]
+            cursor.close()
+            self.db.connection.close()
             return True, result
         except Exception as e:
             return False, str(e)
@@ -26,6 +28,8 @@ class ProductModel:
                 dict(zip(columns, row))
                 for row in cursor.fetchall()
             ]
+            cursor.close()
+            self.db.connection.close()
             return True, result
         except Exception as e:
             return False, str(e)
@@ -35,6 +39,8 @@ class ProductModel:
             cursor = self.db.connection.cursor()
             cursor.execute("INSERT INTO products (name, code, qty) VALUES (%s, %s, %s)", (data['name'], data['code'], data['qty']))
             self.db.connection.commit()
+            cursor.close()
+            self.db.connection.close()
             return True, "Product created successfully"
         except Exception as e:
             return False, str(e)
@@ -44,6 +50,8 @@ class ProductModel:
             cursor = self.db.connection.cursor()
             cursor.execute("UPDATE products SET name = %s, code = %s, qty = %s WHERE id = %s", (data['name'], data['code'], data['qty'], id))
             self.db.connection.commit()
+            cursor.close()
+            self.db.connection.close()
             return True, "Product updated successfully"
         except Exception as e:
             return False, str(e)

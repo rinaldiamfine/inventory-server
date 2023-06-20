@@ -20,6 +20,11 @@ def script_manager(args=[]):
         from app import mail
         status = mail.order_notification_scheduler()
         print(status)
+        
+    if code == "check_order_status":
+        from app.order.models import OrderModel
+        status = OrderModel().check_order_status()
+        print(status)
 
 if __name__ == '__main__':
     script_manager(sys.argv)

@@ -13,6 +13,8 @@ class DepartmentModel:
                 dict(zip(columns, row))
                 for row in cursor.fetchall()
             ]
+            cursor.close()
+            self.db.connection.close()
             return True, result
         except Exception as e:
             return False, str(e)
@@ -26,6 +28,8 @@ class DepartmentModel:
                 dict(zip(columns, row))
                 for row in cursor.fetchall()
             ]
+            cursor.close()
+            self.db.connection.close()
             return True, result
         except Exception as e:
             return False, str(e)

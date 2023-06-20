@@ -51,6 +51,8 @@ class UserModel:
                 dict(zip(columns, row))
                 for row in cursor.fetchall()
             ]
+            cursor.close()
+            self.db.connection.close()
             if len(result) > 0:
                 token = self.encode_auth_token(
                     user_id=result[0].get('id')
