@@ -41,6 +41,17 @@ class UserModel:
             return False, 'Signature expired. Please log in again.'
         except jwt.InvalidTokenError:
             return False, 'Invalid token. Please log in again.'
+      
+    def create_user(self, data):
+        try:
+            cursor = self.db.connection.cursor()
+            cursor.execute("INSERT INTO users (`username`, `password`) VALUES (%s, %s)", (data['username'], data['password']))
+            self.db.connection.commit()
+            cursor.close()
+            self.db.connection.close()
+            return True, "User registered successfully"
+        except Exception as e:
+            return False, str(e)
         
     def auth_users(self, username, password):
         try:

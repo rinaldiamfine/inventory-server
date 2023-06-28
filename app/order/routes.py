@@ -8,9 +8,14 @@ from fastapi import Response
 from app.tools.background import app_background
 from app.order.models import OrderModel
 from app.tools.authorization import validate_token
+from datetime import datetime, date
 
 OrderRoute = APIRouter()
 websites = Jinja2Templates(directory="app/templates")
+
+def default(o):
+    if isinstance(o, (date, datetime)):
+        return o.isoformat()
 
 @OrderRoute.get("/order", tags=['Orders'])
 def order_list(request: Request):
@@ -29,7 +34,7 @@ def order_list(request: Request):
         if not status:
             return Response(content=res, status_code=http.client.BAD_REQUEST)
         return Response(
-            content=json.dumps(res),
+            content=json.dumps(res, default=default),
             status_code=http.client.OK,
             media_type='application/json'
         )
@@ -59,7 +64,7 @@ def order_detail(request: Request, id: int):
         if not status:
             return Response(content=res, status_code=http.client.BAD_REQUEST)
         return Response(
-            content=json.dumps(res),
+            content=json.dumps(res, default=default),
             status_code=http.client.OK,
             media_type='application/json'
         )
@@ -89,7 +94,7 @@ async def order_create(request: Request):
         if not status:
             return Response(content=res, status_code=http.client.BAD_REQUEST)
         return Response(
-            content=json.dumps(res),
+            content=json.dumps(res, default=default),
             status_code=http.client.OK,
             media_type='application/json'
         )
@@ -120,7 +125,7 @@ async def order_update(request: Request, id: int):
         if not status:
             return Response(content=res, status_code=http.client.BAD_REQUEST)
         return Response(
-            content=json.dumps(res),
+            content=json.dumps(res, default=default),
             status_code=http.client.OK,
             media_type='application/json'
         )
@@ -149,7 +154,7 @@ def order_delete(request: Request, id: int):
         if not status:
             return Response(content=res, status_code=http.client.BAD_REQUEST)
         return Response(
-            content=json.dumps(res),
+            content=json.dumps(res, default=default),
             status_code=http.client.OK,
             media_type='application/json'
         )
