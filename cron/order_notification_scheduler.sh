@@ -4,3 +4,5 @@
 ## This script below need to paste on bash (dont forget to add script to activate the virtualenv)
 python3 manage.py order_notification_scheduler
 python3 manage.py check_order_status
+
+# Pleasse check the .env path to run the python script
