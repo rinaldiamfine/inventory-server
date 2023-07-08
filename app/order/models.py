@@ -99,7 +99,7 @@ class OrderModel:
                 for row in cursor.fetchall()
             ]
             if len(result) > 0:
-                returned_product = int(data['qty']) + int(result.get("qty"))
+                returned_product = int(data['qty']) + int(result[0].get("qty"))
                 cursor.execute("UPDATE products SET qty = %s WHERE id = %s", (returned_product, data['product_id']))
                 self.db.connection.commit()
 
