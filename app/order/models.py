@@ -82,7 +82,34 @@ class OrderModel:
             return True, "Order created successfully"
         except Exception as e:
             return False, str(e)
+        
+    def update_order_with_type(self, id, data):
+        try:
+            cursor = self.db.connection.cursor()
+            cursor.execute("UPDATE orders SET product_id = %s, employee_id = %s, qty = %s, start_date = %s, end_date = %s, status = %s WHERE id = %s", (data['product_id'], data['employee_id'], data['qty'], data['status'], id))
+            self.db.connection.commit()
+            # cursor.close()
+            # self.db.connection.close()
 
+            ## updaate the product
+            cursor.execute("SELECT * FROM products WHERE id = %s", (data['product_id'],))
+            columns = [column[0] for column in cursor.description]
+            result = [
+                dict(zip(columns, row))
+                for row in cursor.fetchall()
+            ]
+            if len(result) > 0:
+                returned_product = int(data['qty']) + int(result.get("qty"))
+                cursor.execute("UPDATE products SET qty = %s WHERE id = %s", (returned_product, data['product_id']))
+                self.db.connection.commit()
+                
+            cursor.close()
+            self.db.connection.close()
+
+            return True, "Order updated successfully"
+        except Exception as e:
+            return False, str(e)
+        
     def update_order(self, id, data):
         try:
             cursor = self.db.connection.cursor()

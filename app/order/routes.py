@@ -121,7 +121,10 @@ async def order_update(request: Request, id: int):
         if not status_decode_uid:
             return Response(content=decode_uid, status_code=http.client.UNAUTHORIZED)
         
-        status, res = order.update_order(id, data)
+        if data.get("type") in ["returned", "cancel"]:
+            status, res = order.update_order_with_type(id, data)
+        else:
+            status, res = order.update_order(id, data)
         if not status:
             return Response(content=res, status_code=http.client.BAD_REQUEST)
         return Response(
