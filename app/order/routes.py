@@ -109,8 +109,8 @@ async def order_create(request: Request):
     
 @OrderRoute.put("/order/{id}", tags=['Orders'])
 async def order_update(request: Request, id: int):
-    # '''Update Order'''
-    # try:
+    '''Update Order'''
+    try:
         data = await request.json()
         order = OrderModel()
         
@@ -133,13 +133,13 @@ async def order_update(request: Request, id: int):
             status_code=http.client.OK,
             media_type='application/json'
         )
-    # except Exception as e:
-    #     print(e)
-    #     return Response(
-    #         content=json.dumps({'message': 'Error'}),
-    #         status_code=http.client.INTERNAL_SERVER_ERROR,
-    #         media_type='application/json'
-    #     )
+    except Exception as e:
+        print(e)
+        return Response(
+            content=json.dumps({'message': 'Error'}),
+            status_code=http.client.INTERNAL_SERVER_ERROR,
+            media_type='application/json'
+        )
     
 @OrderRoute.delete("/order/{id}", tags=['Orders'])
 def order_delete(request: Request, id: int):

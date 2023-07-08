@@ -96,14 +96,11 @@ class OrderModel:
             return False, str(e)
         
     def update_order_with_type(self, id, data):
-        # try:
+        try:
             cursor = self.db.connection.cursor()
             cursor.execute("UPDATE orders SET product_id = %s, employee_id = %s, qty = %s, status = %s WHERE id = %s", (data['product_id'], data['employee_id'], data['qty'], data['status'], id))
             self.db.connection.commit()
-            # cursor.close()
-            # self.db.connection.close()
-
-            ## updaate the product
+            
             cursor.execute("SELECT * FROM products WHERE id = %s", (data['product_id'],))
             columns = [column[0] for column in cursor.description]
             result = [
@@ -119,8 +116,8 @@ class OrderModel:
             self.db.connection.close()
 
             return True, "Order updated successfully"
-        # except Exception as e:
-        #     return False, str(e)
+        except Exception as e:
+            return False, str(e)
         
     def update_order(self, id, data):
         # try:
