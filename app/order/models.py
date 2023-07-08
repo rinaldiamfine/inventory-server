@@ -86,7 +86,7 @@ class OrderModel:
     def update_order_with_type(self, id, data):
         # try:
             cursor = self.db.connection.cursor()
-            cursor.execute("UPDATE orders SET product_id = %s, employee_id = %s, qty = %s, start_date = %s, end_date = %s, status = %s WHERE id = %s", (data['product_id'], data['employee_id'], data['qty'], data['status'], id))
+            cursor.execute("UPDATE orders SET product_id = %s, employee_id = %s, qty = %s, status = %s WHERE id = %s", (data['product_id'], data['employee_id'], data['qty'], data['status'], id))
             self.db.connection.commit()
             # cursor.close()
             # self.db.connection.close()
