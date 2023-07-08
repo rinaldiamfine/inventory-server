@@ -84,7 +84,7 @@ class OrderModel:
             return False, str(e)
         
     def update_order_with_type(self, id, data):
-        try:
+        # try:
             cursor = self.db.connection.cursor()
             cursor.execute("UPDATE orders SET product_id = %s, employee_id = %s, qty = %s, start_date = %s, end_date = %s, status = %s WHERE id = %s", (data['product_id'], data['employee_id'], data['qty'], data['status'], id))
             self.db.connection.commit()
@@ -102,24 +102,24 @@ class OrderModel:
                 returned_product = int(data['qty']) + int(result.get("qty"))
                 cursor.execute("UPDATE products SET qty = %s WHERE id = %s", (returned_product, data['product_id']))
                 self.db.connection.commit()
-                
+
             cursor.close()
             self.db.connection.close()
 
             return True, "Order updated successfully"
-        except Exception as e:
-            return False, str(e)
+        # except Exception as e:
+        #     return False, str(e)
         
     def update_order(self, id, data):
-        try:
+        # try:
             cursor = self.db.connection.cursor()
             cursor.execute("UPDATE orders SET product_id = %s, employee_id = %s, qty = %s, start_date = %s, end_date = %s, status = %s WHERE id = %s", (data['product_id'], data['employee_id'], data['qty'], data['start_date'], data['end_date'], data['status'], id))
             self.db.connection.commit()
             cursor.close()
             self.db.connection.close()
             return True, "Order updated successfully"
-        except Exception as e:
-            return False, str(e)
+        # except Exception as e:
+        #     return False, str(e)
 
     def delete_order(self, id):
         try:
