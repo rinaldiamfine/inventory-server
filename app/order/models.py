@@ -77,6 +77,18 @@ class OrderModel:
             cursor = self.db.connection.cursor()
             cursor.execute("INSERT INTO orders (product_id, employee_id, qty, start_date, end_date, status) VALUES (%s, %s, %s, %s, %s, %s)", (data['product_id'], data['employee_id'], data['qty'], data['start_date'], data['end_date'], data['status']))
             self.db.connection.commit()
+
+            cursor.execute("SELECT * FROM products WHERE id = %s", (data['product_id'],))
+            columns = [column[0] for column in cursor.description]
+            result = [
+                dict(zip(columns, row))
+                for row in cursor.fetchall()
+            ]
+            if len(result) > 0:
+                returned_product = int(result[0].get("qty")) - int(data['qty'])
+                cursor.execute("UPDATE products SET qty = %s WHERE id = %s", (returned_product, data['product_id']))
+                self.db.connection.commit()
+
             cursor.close()
             self.db.connection.close()
             return True, "Order created successfully"
